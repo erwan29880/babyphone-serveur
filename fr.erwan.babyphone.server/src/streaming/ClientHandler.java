@@ -10,7 +10,10 @@ import java.net.SocketException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-
+/**
+ * classe pour le streaming audio du micro du serveur vers le client
+ *  sous classe dans un autre Thread pour recevoir des messages du client
+ */
 public class ClientHandler implements Runnable {
 
     /** logger */
@@ -35,7 +38,10 @@ public class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
     }
 
-    /** implémentation de l'interface callable */
+    /** 
+     * Streaming audio vers le client connecté
+     * implémentation de l'interface callable 
+     * */
     @Override
     public void run() {
         try {

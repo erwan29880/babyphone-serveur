@@ -9,9 +9,18 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-/** classe principale du serveur */
+/**
+ * Serveur de streaming audio : 
+ *  le serveur récupére l'audio du micro 
+ *  le serveur attend qu'un client se connecte
+ *  le serveur diffuse l'audio au client
+ *  le client peut éteindre le serveur
+ * 
+ * Classe principale 
+ */
 public class App {
 
+    /** logger */
     private static final Logger LOGGER = Logger.getLogger("log");
 
     /** configuration du logging */
@@ -21,12 +30,13 @@ public class App {
             fileHandler.setFormatter(new SimpleFormatter());
             LOGGER.addHandler(fileHandler);
         } catch (IOException ex) {
-            LOGGER.warning("Could not load configuration file. Using default configuration.");
+            LOGGER.warning("Impossible de charger le fichier de logs, utilisation par défaut");
         }
     }
    
     public static void main(String[] args) {
         
+        // initialisation du socket serveur
         try (ServerSocket serverSocket = new ServerSocket(configuration.Constantes.PORT)) {
             LOGGER.info("Server listening on port " + configuration.Constantes.PORT);
             
